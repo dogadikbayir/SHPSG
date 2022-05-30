@@ -1,6 +1,10 @@
 import numpy as np
+import os
+import time
 
-def SHPSG(Ei, Fi, D2_8, D9_15):
+def SHPSG(Ei, Fi, D2_8, D9_15, i):
+    
+    #Change random seed (for ensuring uniqueiness when generating data in parallel
     Fvec = np.zeros((4,3),dtype=complex)
     # Determine C0 and C1 with Ei, Fi and a unit maximum principal dimension 
     # A sphere with unit diameter  
