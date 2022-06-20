@@ -66,7 +66,7 @@ parser.add_argument(
     '--num_samples', type=int, default=1000
 )
 
-options = parser.parse_arguments()
+options = parser.parse_args()
 
 
 num_samples = options.num_samples

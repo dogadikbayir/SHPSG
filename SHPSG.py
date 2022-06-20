@@ -3,12 +3,13 @@ import os
 import time
 
 def SHPSG(Ei, Fi, D2_8, D9_15, i):
-    
+
     #Change random seed (for ensuring uniqueiness when generating data in parallel
+    np.random.seed((os.getpid() * i*int(time.time()))  % 123456789)
     Fvec = np.zeros((4,3),dtype=complex)
-    # Determine C0 and C1 with Ei, Fi and a unit maximum principal dimension 
-    # A sphere with unit diameter  
-    fvec_sphere = -np.sqrt(np.pi/6)*np.array([[0,0,0],[-1,1j,0],[0,0,np.sqrt(2)],[1,1j,0]]) 
+    # Determine C0 and C1 with Ei, Fi and a unit maximum principal dimension
+    # A sphere with unit diameter
+    fvec_sphere = -np.sqrt(np.pi/6)*np.array([[0,0,0],[-1,1j,0],[0,0,np.sqrt(2)],[1,1j,0]])
     Fvec[0:4,0] = fvec_sphere[:,0]
     Fvec[0:4,1] = Ei*fvec_sphere[:,1]
     Fvec[0:4,2] = (Fi*Ei)*fvec_sphere[:,2]
@@ -20,7 +21,7 @@ def SHPSG(Ei, Fi, D2_8, D9_15, i):
     D_2 = D2_8/((2/2)**1.387+(2/3)**1.387+(2/4)**1.387+(2/5)**1.387+(2/6)**1.387+(2/7)**1.387+(2/8)**1.387)*d1
     D_9 = D9_15/((9/9)**1.426+(9/10)**1.426+(9/11)**1.426+(9/12)**1.426+(9/13)**1.426+(9/14)**1.426+(9/15)**1.426)*d1
 
-    # Determine d3-d8 and d10-d15 
+    # Determine d3-d8 and d10-d15
     #   -Assume all descriptors have three identical decomposition at x-, y- and z-axis
     I = np.zeros((16,3),dtype = float)
     I[1,:] = [1,1,1]
