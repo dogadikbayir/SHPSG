@@ -10,6 +10,8 @@ from pqdm.processes import pqdm
 import pymeshlab
 import argparse
 
+from pathlib import Path
+
 #from joblib
 
 # subdivision level
@@ -66,12 +68,13 @@ parser.add_argument(
     '--num_samples', type=int, default=1000
 )
 
-options = parser.parse_args()
+opt = parser.parse_args()
 
+Path('./data_' + str(opt.num_samples) + '_' + str(opt.scale_factor)).mkdir(parents=True, exist_ok=True)
 
-num_samples = options.num_samples
+num_samples = opt.num_samples
 i_s = range(num_samples)
 
-pqdm(i_s, task, n_jobs=options.num_proc)
+pqdm(i_s, task, n_jobs=opt.num_proc)
 #pqdm(i_s, task, n_jobs=1)
 
